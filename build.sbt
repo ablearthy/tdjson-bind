@@ -18,7 +18,22 @@ lazy val commonSettings = Seq(
       "ablearthy@gmail.com",
       url("https://github.com/ablearthy")
     )
-  )
+  ),
+  scmInfo := Some(
+    ScmInfo(
+      url("https://github.com/ablearthy/tdjson-bind"),
+      "scm:git@github.com:ablearthy/tdjson-bind.git"
+    )
+  ),
+  publish := {},
+  publishLocal := {},
+  pomIncludeRepository := { _ => false },
+  publishTo := {
+    val nexus = "https://s01.oss.sonatype.org/"
+    if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+    else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+  },
+  publishMavenStyle := true
 )
 
 
@@ -27,9 +42,7 @@ lazy val root = project
   .settings(commonSettings: _*)
   .settings(
     scalaVersion := scala3Version,
-    crossScalaVersions := Nil,
-    publish := {},
-    publishLocal := {}
+    crossScalaVersions := Nil
   )
   .aggregate(core, native)
 
@@ -43,7 +56,7 @@ lazy val core = project
 
     sbtJniCoreScope := Compile
   )
-  .dependsOn(Environment.dependOnNative(native % Runtime): _*)
+  .dependsOn(native % Runtime)
 
 lazy val native = project
   .in(file("native"))
