@@ -1,0 +1,3 @@
+[submodule "native/src/td"]
+	path = native/src/td
+	url = https://github.com/tdlib/td
