@@ -62,7 +62,11 @@ JNIEXPORT jint JNICALL Java_io_github_ablearthy_tdjson_TDJson_td_1create_1client
 JNIEXPORT jstring JNICALL Java_io_github_ablearthy_tdjson_TDJson_td_1receive
   (JNIEnv *env, jobject clazz, jdouble timeout) {
     const char* res = td_receive(timeout);
-    return to_jstring(env, res);
+    if (res) {
+      return to_jstring(env, res);
+    } else {
+      return to_jstring(env, "");
+    }
 }
 
 /*
