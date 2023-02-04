@@ -10,7 +10,7 @@ lazy val commonSettings = Seq(
   licenses := Seq("APL2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")),
   homepage := Some(url("https://github.com/ablearthy/tdjson-bind")),
   versionScheme := Some("semver-spec"),
-  version := "1.8.10",
+  version := "1.8.10-1",
   developers := List(
     Developer(
       "ablearthy",
