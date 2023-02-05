@@ -87,7 +87,11 @@ JNIEXPORT void JNICALL Java_io_github_ablearthy_tdjson_TDJson_td_1send
 JNIEXPORT jstring JNICALL Java_io_github_ablearthy_tdjson_TDJson_td_1execute
   (JNIEnv *env, jobject clazz, jstring request) {
     const char* result = td_execute(from_jstring(env, request).c_str());
-    return to_jstring(env, result);
+    if (result) {
+      return to_jstring(env, result);
+    } else {
+      return to_jstring(env, "");
+    }
 }
 
 static constexpr jint JAVA_VERSION = JNI_VERSION_1_6;
